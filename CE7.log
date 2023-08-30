@@ -1,0 +1,483 @@
+﻿# TiMOS-B-21.7.R1 both/x86_64 Nokia 7750 SR Copyright (c) 2000-2021 Nokia.
+# All rights reserved. All use subject to applicable license agreements.
+# Built on Thu Jul 29 14:54:01 PDT 2021 by builder in /builds/c/217B/R1/panos/main/sros
+# Configuration format version 21.7 revision 0
+
+# Generated WED AUG 04 04:50:19 2021 UTC
+
+exit all
+configure
+#--------------------------------------------------
+echo "System Configuration"
+#--------------------------------------------------
+    system
+        name "CE7"
+        management-interface
+            yang-modules
+                no nokia-combined-modules
+                nokia-submodules
+            exit
+        exit
+        snmp
+            shutdown
+        exit                          
+        time
+            sntp
+                shutdown
+            exit
+            zone UTC
+        exit
+    exit
+#--------------------------------------------------
+echo "System Security Configuration"
+#--------------------------------------------------
+    system
+        security
+            profile "default"
+                netconf
+                    base-op-authorization
+                        action
+                        cancel-commit
+                        close-session
+                        commit
+                        copy-config
+                        create-subscription
+                        delete-config
+                        discard-changes
+                        edit-config
+                        get
+                        get-config
+                        get-data
+                        get-schema
+                        validate
+                    exit
+                exit
+                entry 10
+                    match "exec"
+                    action permit
+                exit
+                entry 20
+                    match "exit"
+                    action permit
+                exit
+                entry 30
+                    match "help"
+                    action permit
+                exit
+                entry 40
+                    match "logout"
+                    action permit     
+                exit
+                entry 50
+                    match "password"
+                    action permit
+                exit
+                entry 60
+                    match "show config"
+                    action deny
+                exit
+                entry 65
+                    match "show li"
+                    action deny
+                exit
+                entry 66
+                    match "clear li"
+                    action deny
+                exit
+                entry 67
+                    match "tools dump li"
+                    action deny
+                exit
+                entry 68
+                    match "state li"  
+                    action deny
+                exit
+                entry 70
+                    match "show"
+                    action permit
+                exit
+                entry 75
+                    match "state"
+                    action permit
+                exit
+                entry 80
+                    match "enable-admin"
+                    action permit
+                exit
+                entry 90
+                    match "enable"
+                    action permit
+                exit
+                entry 100
+                    match "configure li"
+                    action deny
+                exit
+            exit                      
+            profile "administrative"
+                netconf
+                    base-op-authorization
+                        action
+                        cancel-commit
+                        close-session
+                        commit
+                        copy-config
+                        create-subscription
+                        delete-config
+                        discard-changes
+                        edit-config
+                        get
+                        get-config
+                        get-data
+                        get-schema
+                        kill-session
+                        lock
+                        validate
+                    exit
+                exit
+                entry 10
+                    match "configure system security"
+                    action permit
+                exit
+                entry 20
+                    match "show system security"
+                    action permit
+                exit
+                entry 30
+                    match "tools perform security"
+                    action permit
+                exit
+                entry 40
+                    match "tools dump security"
+                    action permit
+                exit
+                entry 50
+                    match "admin system security"
+                    action permit
+                exit
+                entry 100
+                    match "configure li"
+                    action deny
+                exit
+                entry 110             
+                    match "show li"
+                    action deny
+                exit
+                entry 111
+                    match "clear li"
+                    action deny
+                exit
+                entry 112
+                    match "tools dump li"
+                    action deny
+                exit
+            exit
+            dist-cpu-protection
+                policy "_default-access-policy" create
+                exit
+                policy "_default-network-policy" create
+                exit
+            exit
+        exit
+    exit
+#--------------------------------------------------
+echo "System Login Control Configuration"
+#--------------------------------------------------
+    system
+        login-control
+            idle-timeout disable
+            pre-login-message "JUST FOR LEARNING ONLY - BY: https://adminreboot.com \nUSER/PASS: admin/admin \nGOOD LUCK!\n\n"
+            login-banner
+        exit
+    exit
+#--------------------------------------------------
+echo "Log Configuration"
+#--------------------------------------------------
+    log
+    exit
+#--------------------------------------------------
+echo "Card Configuration"
+#--------------------------------------------------
+    card 1
+        card-type iom-v
+        mda 1
+            mda-type m20-v
+            no shutdown
+        exit
+        no shutdown
+    exit                              
+#--------------------------------------------------
+echo "Port Configuration"
+#--------------------------------------------------
+    port 1/1/1
+        shutdown
+        ethernet
+        exit
+    exit
+    port 1/1/2
+        ethernet
+        exit
+        no shutdown
+    exit
+    port 1/1/3
+        shutdown
+        ethernet
+        exit
+    exit
+    port 1/1/4
+        ethernet
+        exit
+        no shutdown
+    exit                              
+    port 1/1/5
+        shutdown
+        ethernet
+        exit
+    exit
+    port 1/1/6
+        shutdown
+        ethernet
+        exit
+    exit
+    port 1/1/7
+        shutdown
+        ethernet
+        exit
+    exit
+    port 1/1/8
+        shutdown
+        ethernet
+        exit
+    exit
+    port 1/1/9
+        shutdown
+        ethernet                      
+        exit
+    exit
+    port 1/1/10
+        shutdown
+        ethernet
+        exit
+    exit
+    port 1/1/11
+        shutdown
+        ethernet
+        exit
+    exit
+    port 1/1/12
+        shutdown
+        ethernet
+        exit
+    exit
+    port 1/1/13
+        shutdown
+        ethernet
+        exit
+    exit
+    port 1/1/14                       
+        shutdown
+        ethernet
+        exit
+    exit
+    port 1/1/15
+        shutdown
+        ethernet
+        exit
+    exit
+    port 1/1/16
+        shutdown
+        ethernet
+        exit
+    exit
+    port 1/1/17
+        shutdown
+        ethernet
+        exit
+    exit
+    port 1/1/18
+        shutdown
+        ethernet
+        exit                          
+    exit
+    port 1/1/19
+        shutdown
+        ethernet
+        exit
+    exit
+    port 1/1/20
+        shutdown
+        ethernet
+        exit
+    exit
+#--------------------------------------------------
+echo "Management Router Configuration"
+#--------------------------------------------------
+    router management
+    exit
+
+#--------------------------------------------------
+echo "Router (Network Side) Configuration"
+#--------------------------------------------------
+    router Base
+        flexible-algorithm-definitions
+            flex-algo "FlexAgoTest" create
+                metric-type delay
+                no shutdown
+            exit
+        exit
+        interface "system"
+            address 7.7.7.7/32
+            no shutdown
+        exit
+        interface "to-CE8"
+            address 10.1.78.7/24
+            port 1/1/2
+            if-attribute
+                delay
+                    static 10
+                exit
+            exit
+            no shutdown
+        exit
+        interface "to-PE2"
+            address 10.1.27.7/24
+            port 1/1/4
+            if-attribute
+                delay                 
+                    static 1000
+                exit
+            exit
+            no shutdown
+        exit
+        autonomous-system 65555
+#--------------------------------------------------
+echo "MPLS Label Range Configuration"
+#--------------------------------------------------
+        mpls-labels
+            sr-labels start 20000 end 30000
+        exit
+#--------------------------------------------------
+echo "OSPFv2 Configuration"
+#--------------------------------------------------
+        ospf 0
+            advertise-router-capability area
+            segment-routing
+                prefix-sid-range global
+                no shutdown
+            exit
+            area 0.0.0.0
+                interface "system"    
+                    node-sid index 7
+                    flex-algo 129
+                        node-sid index 17
+                    exit
+                    no shutdown
+                exit
+                interface "to-CE8"
+                    interface-type point-to-point
+                    no shutdown
+                exit
+                interface "to-PE2"
+                    interface-type point-to-point
+                    no shutdown
+                exit
+            exit
+            flexible-algorithms
+                flex-algo 129
+                    advertise "FlexAgoTest"
+                    participate
+                exit
+                no shutdown
+            exit
+            no shutdown               
+        exit
+    exit
+
+#--------------------------------------------------
+echo "Service Configuration"
+#--------------------------------------------------
+    service
+        customer 1 name "1" create
+            description "Default customer"
+        exit
+        vprn 55 name "55" customer 1 create
+            interface "Tester7" create
+            exit
+        exit
+        vprn 55 name "55" customer 1 create
+            interface "Tester7" create
+                address 192.168.7.7/24
+                loopback
+            exit
+            bgp-ipvpn
+                mpls
+                    auto-bind-tunnel
+                        resolution-filter
+                            sr-ospf
+                        exit
+                        resolution filter
+                    exit
+                    route-distinguisher 65555:55
+                    vrf-import "VPRN-55-IMPORT"
+                    vrf-export "VPRN-55-EXPORT"
+                    no shutdown
+                exit
+            exit
+            no shutdown
+        exit
+    exit
+#--------------------------------------------------
+echo "Router (Service Side) Configuration"
+#--------------------------------------------------
+    router Base
+#--------------------------------------------------
+echo "OSPFv2 Configuration"
+#--------------------------------------------------
+        ospf 0
+            no shutdown
+        exit                          
+#--------------------------------------------------
+echo "Policy Configuration"
+#--------------------------------------------------
+        policy-options
+            begin
+            community "VPRN-55"
+                members "target:65555:55"
+            exit
+            policy-statement "VPRN-55-EXPORT"
+                default-action accept
+                    community add "VPRN-55"
+                exit
+            exit
+            policy-statement "VPRN-55-IMPORT"
+                entry 10
+                    from
+                        community "VPRN-55"
+                    exit
+                    action accept
+                        flex-algo 129
+                    exit
+                exit
+            exit                      
+            commit
+        exit
+#--------------------------------------------------
+echo "BGP Configuration"
+#--------------------------------------------------
+        bgp
+            group "CE-CE"
+                family vpn-ipv4
+                peer-as 65555
+                neighbor 6.6.6.6
+                exit
+            exit
+            no shutdown
+        exit
+    exit
+
+#--------------------------------------------------
+echo "Log all events for service vprn Configuration"
+#--------------------------------------------------
+    log
+    exit
+
+exit all                              
